@@ -1,15 +1,16 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "blog/base.html" %}
+{% block title %}Meu blog{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-
-</body>
-
-</html>
+{% block content %}
+    {% for post in post_list %}
+        <article>
+            <h3>
+                <a header="{{ post.get_absolute_url }}">
+                    {{ post.title }}
+                </a>
+            </h3>
+            <p class="date">Publicado em {{ post.created_on }} por {{post.author}}</p>
+            {{post.body|linebreaks|truncatewords:10}}
+        </article>
+    {% endfor %}
+{% endblock %}
