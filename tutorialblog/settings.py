@@ -55,7 +55,6 @@ ROOT_URLCONF = "tutorialblog.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -77,6 +76,9 @@ WSGI_APPLICATION = "tutorialblog.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
+        # 'OPTIONS': {
+        #     'read_default_file': './path/to/my.cnf',
+        # },
         "NAME": "blog",
         "USER": "cla",
         "PASSWORD": "5656",
