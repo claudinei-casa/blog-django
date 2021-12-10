@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    # local apps
+    "cars.apps.CarsConfig",
     "blog.apps.BlogConfig",
 ]
 
@@ -83,7 +86,7 @@ DATABASES = {
         "USER": "cla",
         "PASSWORD": "5656",
         "HOST": "localhost",
-        "PORT": "8000",
+        "PORT": "3306",
     }
 }
 
