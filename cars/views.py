@@ -13,14 +13,14 @@ def Create(request):
         context = {
             'form': CreateCar
         }
-        return render(request, "cadastrar.html", context=context)
+        return render(request, "create.html", context=context)
     else:
         forms = CreateCar(request.POST)
         if forms.is_valid():
             forms.save()
-            return render(request, "cadastrar.html", context={'form': CreateCar})
+            return render(request, "create.html", context={'form': CreateCar})
         else:
-            return render(request, "cadastrar.html", context={'form': forms})
+            return render(request, "create.html", context={'form': forms})
 
 
 def Delete(request, id):  # deletar

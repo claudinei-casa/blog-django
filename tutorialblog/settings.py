@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # local apps
     "cars.apps.CarsConfig",
     "blog.apps.BlogConfig",
+    "home.apps.HomeConfig",
 ]
 
 MIDDLEWARE = [
