@@ -26,4 +26,7 @@ class Cars(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        return self.make + ' ' + self.model
+        return self.make + '-' + self.model
+
+    def get_absolute_url(self):
+        return f"/cars/{self.slug}"

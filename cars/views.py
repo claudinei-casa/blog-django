@@ -1,10 +1,12 @@
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView
+from .models import Cars
 from django.views.decorators.http import require_http_methods
 from .forms import CreateCar
 
 
 @require_http_methods(["GET", "POST"])
-def Create(request):  # cadastro
+def Create(request):
 
     if request.method == "GET":
         forms = CreateCar()
@@ -27,3 +29,12 @@ def Delete(request, id):  # deletar
 
 def update(request):  # atualizar
     pass
+
+
+class CarsListView(ListView):
+    model = Cars
+    fields = "__all__"
+
+
+class CarsDetailView(DetailView):
+    model = Cars
