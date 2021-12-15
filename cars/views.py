@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponseRedirect
 from django.views.generic import ListView, DetailView
 from .models import Cars
 from django.views.decorators.http import require_http_methods
@@ -18,8 +18,9 @@ def create(request):
 
 def delete_car(request, pk):
     transaction = Cars.objects.get(pk=pk)
-    transaction.delete()
-    return render(request, "cars/cars_list.html", context={'cars': Cars.objects.all()})
+    if transaction:
+        transaction.delete()
+    return HttpResponseRedirect('/')
 
 
 class CarsListView(ListView):
