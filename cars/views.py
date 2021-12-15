@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.views.generic import ListView, DetailView
 from .models import Cars
 from django.views.decorators.http import require_http_methods
@@ -6,29 +6,20 @@ from .forms import CreateCar
 
 
 @require_http_methods(["GET", "POST"])
-def Create(request):
-
-    if request.method == "GET":
-        forms = CreateCar()
-        context = {
-            'form': CreateCar
-        }
-        return render(request, "create.html", context=context)
-    else:
+def create(request):
+    if request.method == "POST":
         forms = CreateCar(request.POST)
         if forms.is_valid():
             forms.save()
-            return render(request, "create.html", context={'form': CreateCar})
         else:
             return render(request, "create.html", context={'form': forms})
+    return render(request, "create.html", context={'form': CreateCar})
 
 
-def Delete(request, id):  # deletar
-    pass
-
-
-def update(request):  # atualizar
-    pass
+def delete_car(request, pk):
+    transaction = Cars.objects.get(pk=pk)
+    transaction.delete()
+    return render(request, "cars/cars_list.html", context={'cars': Cars.objects.all()})
 
 
 class CarsListView(ListView):
@@ -38,3 +29,13 @@ class CarsListView(ListView):
 
 class CarsDetailView(DetailView):
     model = Cars
+
+
+def update(request, pk):
+    transaction = Cars.objects.get(pk=pk)
+    forms = CreateCar(request.POST or None, instance=transaction)
+    if forms.is_valid():
+        forms.save()
+        return render(request, "create.html", context={'form': CreateCar})
+    else:
+        return render(request, "create.html", context={'form': forms})
