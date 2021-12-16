@@ -30,13 +30,13 @@ def read(request):
     return render(request, "cars_list.html", context={'cars': cars})
 
 
-@login_required(login_url='login/')
+@login_required(login_url='/login/')
 def cars_detail(request, id):
     car = Cars.objects.get(id=id)
     return render(request, "cars_detail.html", context={'car': car})
 
 
-@login_required(login_url="login/")
+@login_required(login_url="/login/")
 def update(request, pk):
     transaction = Cars.objects.get(pk=pk)
     forms = CreateCar(request.POST or None, instance=transaction)
