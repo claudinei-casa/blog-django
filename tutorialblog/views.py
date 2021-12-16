@@ -2,6 +2,6 @@ from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
 
-@require_http_methods(["GET"])
-def home_page(request):
-    return render(request, 'index.html')
+def base_page(request):
+    user = request.user
+    return render(request, 'base.html', context={'users': user})
