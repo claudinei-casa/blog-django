@@ -1,14 +1,14 @@
-{%extends "blog/base.html"%}
+{%extends "base.html"%}
 {% block title%}post.title{%endblock%}
 {% block content%}
 
 <body>
-    <header></header>
-    <main>
-        <h2>{{ post.title }}</h2>
-        <p class="date">Publicado em {{ post.created_on }} por {{post.author}}</p>
-        <p>{{post.body|linebreaks}}</p>
-    </main>
+<header></header>
+<main>
+    <h2>{{ post.title }}</h2>
+    <p class="date">Publicado em {{ post.created_on }} por {{post.author}}</p>
+    <p>{{post.body|linebreaks}}</p>
+</main>
 </body>
 
 {%endblock%}

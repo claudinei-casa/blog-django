@@ -1,6 +1,5 @@
 from django.db import models
-
-# Create your models here.
+from django.contrib.auth.models import User
 
 YEAR_CHOICES = [
     (2018, 2018),
@@ -12,21 +11,26 @@ YEAR_CHOICES = [
     (2012, 2012),
     (2011, 2011),
     (2010, 2010),
+    (2009, 2009),
+    (2008, 2008),
+    (2007, 2007),
 ]
 
 
 class Cars(models.Model):
-    make = models.CharField(max_length=50)
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=50)
+    brand = models.CharField(max_length=50)
     model = models.CharField(max_length=30)
-    slug = models.SlugField(max_length=255, unique=True)
     year = models.IntegerField(choices=YEAR_CHOICES)
     color = models.CharField(max_length=30)
     price = models.IntegerField(blank=True, null=True)
     mileage = models.IntegerField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
+    usr = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.make + '-' + self.model
+        return self.title
 
     def get_absolute_url(self):
-        return f"/cars/{self.slug}"
+        return f"/cars/{self.id}"

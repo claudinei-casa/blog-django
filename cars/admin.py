@@ -5,9 +5,8 @@ from .models import Cars
 
 @admin.register(Cars)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ("make", "model", "slug", "year", "color",
-                    "price", "mileage", "description")
-    list_filter = ("model", "color", "make", "slug")
-    search_fields = ("make", "model", "slug")
-    prepopulated_fields = {"slug": ("make", "model",)}
-    ordering = ["make", "year"]
+    list_display = ("id", "title", "brand", "model", "year", "color",
+                    "price", "mileage", "description", "usr",)
+    list_filter = ("model", "color", "brand", "title",)
+    search_fields = ("brand", "year", "title", "model",)
+    ordering = ["title", "brand", "year"]

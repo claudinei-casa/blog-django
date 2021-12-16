@@ -22,4 +22,5 @@ urlpatterns = [
     path('', home_page, name='index'),
     path("blog/", include("blog.urls", namespace="blog")),
     path("cars/", include("cars.urls", namespace="cars")),
+    path("login/", include("login.urls", namespace="login")),
 ]
