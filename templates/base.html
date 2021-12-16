@@ -32,16 +32,19 @@
                         <a class="nav-link" href="/blog">Blog</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                <a class="btn btn-outline-primary m-1" href="/login">Sign In</a>
+                <a class="btn btn-outline-primary m-1" href="/login/logout">Logout</a>
+                <p>{{users.username}}</p>
+                {% block search %}
+                {% endblock %}
+                {% block nav_login %}
+                {% endblock %}
             </div>
         </div>
     </nav>
 </header>
 {% block content %} {% endblock %}
-<footer class="row justify-content-center">
+<footer class="row justify-content-center bottom">
     <div class="col-12">
         <p>&copy; 2021 - My</p>
     </div>

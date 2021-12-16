@@ -1,18 +1,29 @@
 {% extends "base.html" %}
-{% block title %}Meu blog{% endblock %}
+{% block title %}Blog{% endblock %}
+
+{% block search %}
+<form class="d-flex">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+{% endblock %}
 
 {% block content %}
-{% for post in post_list %}
-<div class="card mt-2" style="width: 70%">
-    <div class="card-body">
-        <h5 class="card-title">
-            <a href="{{ post.get_absolute_url }}">
-                {{ post.title }}
-            </a>
-        </h5>
-        <h6 class="card-subtitle mb-2 text-muted">Publicado em {{ post.created_on }} por {{post.author}}</h6>
-        <p class="card-text">{{post.body|linebreaks|truncatewords:15}}</p>
+<main class="container">
+    {% for post in post_list %}
+    <div class="row justify-content-center">
+        <div class="card-body">
+            <h4 class="card-title ">
+                <a href="{{ post.get_absolute_url }}" style="text-decoration: none;">
+                    {{ post.title }}
+                </a>
+            </h4>
+            <h6 class="card-subtitle mt-1 text-muted">Publicado em {{ post.created_on }}</h6>
+
+            <p class="card-text">{{post.body|linebreaks|truncatewords:50}}</p>
+            <p class="mt-1 text-muted" style="font-size: 14px">Author: {{post.author}}</p>
+        </div>
     </div>
-</div>
-{% endfor %}
+    {% endfor %}
+</main>
 {% endblock %}
