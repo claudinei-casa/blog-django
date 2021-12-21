@@ -17,16 +17,31 @@ YEAR_CHOICES = [
 ]
 
 
+class Opt(models.Model):
+    opt = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.opt
+
+
+class Brands(models.Model):
+    brand = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.brand
+
+
 class Cars(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=50)
-    brand = models.CharField(max_length=50)
-    model = models.CharField(max_length=30)
+    brand = models.ForeignKey("Brands", on_delete=models.CASCADE, related_name='brands')
+    model = models.CharField(max_length=25)
     year = models.IntegerField(choices=YEAR_CHOICES)
     color = models.CharField(max_length=30)
     price = models.IntegerField(blank=True, null=True)
     mileage = models.IntegerField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
+    opt = models.ManyToManyField(Opt, related_name='opt_cars')
     usr = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -34,3 +49,7 @@ class Cars(models.Model):
 
     def get_absolute_url(self):
         return f"/cars/{self.id}"
+
+    def get_brands_admin(self):
+        brands = Brands.objects.filter(id=self.brand.id)
+        return list(brands)
